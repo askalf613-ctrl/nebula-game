@@ -3,74 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loot Game</title>
+<title>Nebula Idle</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
-    background:#0f172a;
+    background:#0b1020;
     color:white;
 }
 
-button{
-    padding:8px 12px;
-    border:none;
-    border-radius:8px;
-    background:#06b6d4;
-    color:white;
-    font-weight:bold;
-    margin-top:5px;
-}
-
+/* ÜST BAR */
 #topBar{
     padding:15px;
     background:#111827;
-    margin-right:320px;
 }
 
+#money{
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* BUTONLAR */
+button{
+    background:#22d3ee;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+/* ENVANTER */
 #inventoryPanel{
-    position:fixed;
-    right:0;
-    top:0;
-    width:300px;
-    height:100%;
-    background:#111827;
+    margin-top:20px;
     padding:15px;
-    overflow:auto;
+    background:#0f172a;
 }
 
-.invItem{
+.item{
     background:#1f2937;
     padding:10px;
+    border-radius:12px;
     margin-bottom:10px;
-    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* AYAR PANELİ */
-#settingsPanel{
-    position:fixed;
-    left:50%;
-    top:50%;
-    transform:translate(-50%, -50%);
-    background:#1f2937;
-    padding:20px;
-    border-radius:12px;
-    display:none; /* EN KRİTİK YER */
-}
+/* rarity renkleri */
+.common{ color:#9ca3af; }
+.rare{ color:#60a5fa; }
+.epic{ color:#c084fc; }
+.legendary{ color:#fbbf24; }
+
 </style>
 </head>
 
 <body>
 
-<!-- ÜST -->
 <div id="topBar">
-    <h2>Oyuncu</h2>
+    <div id="money">Para: 0</div>
     <div id="equipped">Takılı: Yok</div>
 
-    <br>
     <button onclick="testLoot()">TEST LOOT</button>
-    <button onclick="openSettings()">Ayarlar</button>
+    <button onclick="resetGame()">Ayar Sıfırla</button>
 </div>
 
 <!-- ENVANTER -->
@@ -79,17 +76,6 @@ button{
     <div id="inventoryList"></div>
 </div>
 
-<!-- AYAR -->
-<div id="settingsPanel">
-    <h3>Ayarlar</h3>
-
-    <button onclick="resetGame()">Oyunu Sıfırla</button>
-    <button onclick="closeSettings()">Kapat</button>
-</div>
-
-<!-- JS -->
-<script src="inventory.js"></script>
 <script src="game.js"></script>
-
 </body>
 </html>
