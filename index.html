@@ -1,122 +1,72 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NEBULA OVERLORD</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loot Game</title>
 
-<style>
-:root { --p:#00f2ff; --bg:#020205; --w:#fff; }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;}
-body{margin:0;background:var(--bg);color:white;font-family:Segoe UI, sans-serif;overflow:hidden;}
+    <style>
+        body{
+            margin:0;
+            font-family:Arial, Helvetica, sans-serif;
+            background:#0f172a;
+            color:white;
+        }
 
-.h-panel{text-align:center;padding:25px;border-bottom:1px solid rgba(255,255,255,0.05);}
-#money{font-size:40px;font-weight:900;color:var(--p);}
+        button{
+            padding:10px 15px;
+            border:none;
+            border-radius:8px;
+            background:#06b6d4;
+            color:white;
+            font-weight:bold;
+        }
 
-.core{height:45vh;display:flex;justify-content:center;align-items:center;}
-.core button{width:150px;height:150px;border-radius:50%;border:none;font-size:50px;background:#111;color:white;}
-.core button:active{transform:scale(0.9);}
+        #inventoryPanel{
+            position:fixed;
+            right:0;
+            top:0;
+            width:300px;
+            height:100%;
+            background:#111827;
+            padding:15px;
+            overflow:auto;
+        }
 
-.nav-bar{position:fixed;bottom:25px;width:100%;display:flex;justify-content:center;gap:12px;}
-.n-btn{width:60px;height:60px;border-radius:15px;border:none;background:#111;color:white;font-size:20px;}
+        .invItem{
+            background:#1f2937;
+            padding:10px;
+            margin-bottom:10px;
+            border-radius:10px;
+        }
 
-.pnl{position:fixed;inset:0;background:#050510;display:none;flex-direction:column;padding:20px;z-index:100;}
-.pnl-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
-
-.card{
-    background:rgba(255,255,255,0.05);
-    padding:15px;
-    border-radius:15px;
-    margin-bottom:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.buy{
-    background:var(--p);
-    border:none;
-    padding:8px 14px;
-    border-radius:10px;
-    font-weight:bold;
-}
-</style>
+        #topBar{
+            padding:15px;
+            background:#111827;
+            margin-right:320px;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- PARA -->
-<div class="h-panel">
-    <div id="money">0 ₺</div>
-</div>
-
-<!-- TIKLAMA -->
-<div class="core">
-    <button onclick="tıkla()">⚡</button>
-</div>
-
-<!-- ALT MENU -->
-<div class="nav-bar">
-    <button class="n-btn" onclick="pAç('mkt')">🛒</button>
-    <button class="n-btn" onclick="pAç('inv')">🎒</button>
-    <button class="n-btn" onclick="pAç('eq')">🧥</button>
-    <button class="n-btn" onclick="pAç('set')">⚙️</button>
-</div>
-
-<!-- MARKET -->
-<div id="p-mkt" class="pnl">
-    <div class="pnl-h">
-        <h2>MARKET</h2>
-        <b onclick="pKapat()">×</b>
+    <!-- ÜST BİLGİ -->
+    <div id="topBar">
+        <h2>Oyuncu</h2>
+        <div id="equipped">Takılı: Yok</div>
+        <br>
+        <button onclick="testLoot()">TEST LOOT</button>
     </div>
-    <div>Yakında...</div>
-</div>
 
-<!-- ENVANTER -->
-<div id="p-inv" class="pnl">
-    <div class="pnl-h">
+    <!-- ENVANTER -->
+    <div id="inventoryPanel">
         <h2>ENVANTER</h2>
-        <b onclick="pKapat()">×</b>
+        <div id="inventoryList"></div>
     </div>
-    <div id="inv-list" style="overflow:auto;flex:1;"></div>
-</div>
 
-<!-- EQUIP -->
-<div id="p-eq" class="pnl">
-    <div class="pnl-h">
-        <h2>EKİPMAN</h2>
-        <b onclick="pKapat()">×</b>
-    </div>
-    <div id="eq-list" style="overflow:auto;flex:1;"></div>
-</div>
-
-<!-- AYARLAR -->
-<div id="p-set" class="pnl">
-    <div class="pnl-h">
-        <h2>AYARLAR</h2>
-        <b onclick="pKapat()">×</b>
-    </div>
-    <button onclick="localStorage.clear();location.reload();" class="buy">
-        VERİLERİ SİL
-    </button>
-</div>
-
-<!-- PANEL AÇMA -->
-<script>
-function pAç(id){
-    document.querySelectorAll(".pnl").forEach(p=>p.style.display="none");
-    document.getElementById("p-"+id).style.display="flex";
-}
-function pKapat(){
-    document.querySelectorAll(".pnl").forEach(p=>p.style.display="none");
-}
-</script>
-
-<!-- MODÜLLER -->
-<script src="game.js"></script>
-<script src="loot.js"></script>
-<script src="inventory.js"></script>
-<script src="equip.js"></script>
+    <!-- JS DOSYALARI -->
+    <script src="inventory.js"></script>
+    <script src="game.js"></script>
 
 </body>
 </html>

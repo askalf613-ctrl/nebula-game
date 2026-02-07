@@ -1,56 +1,46 @@
-// ===============================
-// ENVANTER SİSTEMİ
-// ===============================
+// ENVANTER
+let inventory = [];
 
-let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+// TAKILI ITEM
+let equippedItem = null;
 
-// item ekleme
+// ITEM EKLEME (loot burayı kullanacak)
 function addItem(item) {
     inventory.push(item);
-    saveInventory();
     renderInventory();
 }
 
-// kaydet
-function saveInventory() {
-    localStorage.setItem("inventory", JSON.stringify(inventory));
-}
-
-// nadirlik rengi
-function rarityColor(r) {
-    if (r === "common") return "#aaa";
-    if (r === "rare") return "#4da6ff";
-    if (r === "epic") return "#c77dff";
-    if (r === "legend") return "#ffb703";
-    return "white";
-}
-
-// envanter göster
+// ENVANTERİ ÇİZ
 function renderInventory() {
-    const el = document.getElementById("inv-list");
-    if (!el) return;
+    const list = document.getElementById("inventoryList");
+    if (!list) return;
 
-    el.innerHTML = "";
+    list.innerHTML = "";
 
-    if (inventory.length === 0) {
-        el.innerHTML = "<p>Hiç item yok</p>";
-        return;
-    }
+    inventory.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "invItem";
 
-    inventory.forEach((it, i) => {
-        const d = document.createElement("div");
-        d.className = "card";
-        d.innerHTML = `
-            <div>
-                <b style="color:${rarityColor(it.rarity)}">${it.name}</b><br>
-                <small>Güç: +${it.power}</small><br>
-                <small>${it.rarity}</small>
-            </div>
-            <button class="buy" onclick="equipItem(${i})">TAK</button>
+        div.innerHTML = `
+            <b>${item.name}</b><br>
+            Güç: +${item.power}<br>
+            ${item.rarity}<br>
+            <button onclick="equipItem(${i})">TAK</button>
         `;
-        el.appendChild(d);
+
+        list.appendChild(div);
     });
 }
 
-// ilk açılışta yükle
-setTimeout(renderInventory, 500);
+// ITEM TAK
+function equipItem(index) {
+    equippedItem = inventory[index];
+
+    const eq = document.getElementById("equipped");
+    if (eq) {
+        eq.innerText = `Takılı: ${equippedItem.name} +${equippedItem.power}`;
+    }
+
+    // ileride buraya güç hesaplama girecek
+    console.log("Takıldı:", equippedItem);
+}
