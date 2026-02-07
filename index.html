@@ -1,72 +1,95 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loot Game</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loot Game</title>
 
-    <style>
-        body{
-            margin:0;
-            font-family:Arial, Helvetica, sans-serif;
-            background:#0f172a;
-            color:white;
-        }
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:white;
+}
 
-        button{
-            padding:10px 15px;
-            border:none;
-            border-radius:8px;
-            background:#06b6d4;
-            color:white;
-            font-weight:bold;
-        }
+button{
+    padding:8px 12px;
+    border:none;
+    border-radius:8px;
+    background:#06b6d4;
+    color:white;
+    font-weight:bold;
+    margin-top:5px;
+}
 
-        #inventoryPanel{
-            position:fixed;
-            right:0;
-            top:0;
-            width:300px;
-            height:100%;
-            background:#111827;
-            padding:15px;
-            overflow:auto;
-        }
+#topBar{
+    padding:15px;
+    background:#111827;
+    margin-right:320px;
+}
 
-        .invItem{
-            background:#1f2937;
-            padding:10px;
-            margin-bottom:10px;
-            border-radius:10px;
-        }
+#inventoryPanel{
+    position:fixed;
+    right:0;
+    top:0;
+    width:300px;
+    height:100%;
+    background:#111827;
+    padding:15px;
+    overflow:auto;
+}
 
-        #topBar{
-            padding:15px;
-            background:#111827;
-            margin-right:320px;
-        }
-    </style>
+.invItem{
+    background:#1f2937;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+/* AYAR PANELİ */
+#settingsPanel{
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    background:#1f2937;
+    padding:20px;
+    border-radius:12px;
+    display:none; /* EN KRİTİK YER */
+}
+</style>
 </head>
 
 <body>
 
-    <!-- ÜST BİLGİ -->
-    <div id="topBar">
-        <h2>Oyuncu</h2>
-        <div id="equipped">Takılı: Yok</div>
-        <br>
-        <button onclick="testLoot()">TEST LOOT</button>
-    </div>
+<!-- ÜST -->
+<div id="topBar">
+    <h2>Oyuncu</h2>
+    <div id="equipped">Takılı: Yok</div>
 
-    <!-- ENVANTER -->
-    <div id="inventoryPanel">
-        <h2>ENVANTER</h2>
-        <div id="inventoryList"></div>
-    </div>
+    <br>
+    <button onclick="testLoot()">TEST LOOT</button>
+    <button onclick="openSettings()">Ayarlar</button>
+</div>
 
-    <!-- JS DOSYALARI -->
-    <script src="inventory.js"></script>
-    <script src="game.js"></script>
+<!-- ENVANTER -->
+<div id="inventoryPanel">
+    <h2>Envanter</h2>
+    <div id="inventoryList"></div>
+</div>
+
+<!-- AYAR -->
+<div id="settingsPanel">
+    <h3>Ayarlar</h3>
+
+    <button onclick="resetGame()">Oyunu Sıfırla</button>
+    <button onclick="closeSettings()">Kapat</button>
+</div>
+
+<!-- JS -->
+<script src="inventory.js"></script>
+<script src="game.js"></script>
 
 </body>
 </html>
