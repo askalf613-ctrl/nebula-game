@@ -1,38 +1,37 @@
-// ENVANTER
 let inventory = [];
-
-// TAKILI ITEM
 let equippedItem = null;
 
-// ITEM EKLEME (loot burayı kullanacak)
 function addItem(item) {
     inventory.push(item);
     renderInventory();
 }
 
-// ENVANTERİ ÇİZ
 function renderInventory() {
     const list = document.getElementById("inventoryList");
     if (!list) return;
 
     list.innerHTML = "";
 
-    inventory.forEach((item, i) => {
+    inventory.forEach((item, index) => {
         const div = document.createElement("div");
         div.className = "invItem";
 
-        div.innerHTML = `
-            <b>${item.name}</b><br>
-            Güç: +${item.power}<br>
-            ${item.rarity}<br>
-            <button onclick="equipItem(${i})">TAK</button>
-        `;
+        const title = document.createElement("div");
+        title.innerHTML = `<b>${item.name}</b><br>Güç: +${item.power}<br>${item.rarity}`;
+
+        const btn = document.createElement("button");
+        btn.innerText = "TAK";
+
+        // EN ÖNEMLİ KISIM
+        btn.onclick = () => equipItem(index);
+
+        div.appendChild(title);
+        div.appendChild(btn);
 
         list.appendChild(div);
     });
 }
 
-// ITEM TAK
 function equipItem(index) {
     equippedItem = inventory[index];
 
@@ -41,6 +40,5 @@ function equipItem(index) {
         eq.innerText = `Takılı: ${equippedItem.name} +${equippedItem.power}`;
     }
 
-    // ileride buraya güç hesaplama girecek
     console.log("Takıldı:", equippedItem);
 }
