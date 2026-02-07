@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebula Overlord</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#070b1a;
+  color:white;
+  text-align:center;
+}
+
+#money{font-size:40px;margin-top:20px;color:#00f2ff}
+.core{
+  font-size:70px;
+  margin:40px;
+  cursor:pointer;
+}
+
+.nav{
+  position:fixed;
+  bottom:20px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
+.pnl{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000c;
+  padding:20px;
+}
+
+.card{
+  background:#111;
+  margin:10px;
+  padding:10px;
+  border-radius:10px;
+}
+button{padding:10px 15px;font-weight:bold;}
+#loot{position:fixed;top:20px;right:20px;display:none;cursor:pointer;}
+#drop{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000d;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="money">0 ₺</h1>
+<div>Gelir/sn: <span id="inc">0</span></div>
+
+<div class="core" onclick="clickCore()">⚡</div>
+
+<div id="loot">🎁</div>
+
+<div class="nav">
+<button onclick="openP('shop')">🛒</button>
+<button onclick="openP('inv')">🎒</button>
+<button onclick="openP('set')">⚙️</button>
+</div>
+
+<!-- MARKET -->
+<div id="p-shop" class="pnl">
+<h2>Market</h2>
+<div id="shop"></div>
+<button onclick="closeP()">Kapat</button>
+</div>
+
+<!-- ENVANTER -->
+<div id="p-inv" class="pnl">
+<h2>Envanter</h2>
+<div id="equip"></div>
+<div id="inv"></div>
+<button onclick="closeP()">Kapat</button>
+</div>
+
+<!-- AYARLAR -->
+<div id="p-set" class="pnl">
+<h2>Ayarlar</h2>
+<button onclick="daily()">Günlük Ödül</button>
+<button onclick="rst()">RESET</button>
+<button onclick="closeP()">Kapat</button>
+</div>
+
+<!-- DROP -->
+<div id="drop"></div>
+
+<!-- MÜZİK -->
+<audio id="bgm" loop>
+  <source src="muzik.mp4" type="audio/mp4">
+</audio>
+
+<!-- OYUN BEYNİ -->
+<script src="game.js"></script>
+
+</body>
+</html>
