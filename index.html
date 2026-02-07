@@ -2,110 +2,169 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nebula Overlord</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NEBULA OVERLORD</title>
 
 <style>
+:root { --p:#00f2ff; --s:#7000ff; --bg:#020205; --w:#fff; }
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;}
 body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#070b1a;
-  color:white;
-  text-align:center;
+    margin:0;
+    background:var(--bg);
+    color:white;
+    font-family:Segoe UI, sans-serif;
+    overflow:hidden;
 }
 
-#money{font-size:40px;margin-top:20px;color:#00f2ff}
+/* üst para */
+.h-panel{
+    text-align:center;
+    padding:25px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+#money{
+    font-size:40px;
+    font-weight:900;
+    color:var(--p);
+}
+
+/* çekirdek */
 .core{
-  font-size:70px;
-  margin:40px;
-  cursor:pointer;
+    height:45vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.core button{
+    width:150px;height:150px;
+    border-radius:50%;
+    border:none;
+    font-size:50px;
+    background:#111;
+    color:white;
+}
+.core button:active{transform:scale(0.9);}
+
+/* alt menu */
+.nav-bar{
+    position:fixed;
+    bottom:25px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+.n-btn{
+    width:60px;height:60px;
+    border-radius:15px;
+    border:none;
+    background:#111;
+    color:white;
+    font-size:20px;
 }
 
-.nav{
-  position:fixed;
-  bottom:20px;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-
+/* panel */
 .pnl{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000c;
-  padding:20px;
+    position:fixed;
+    inset:0;
+    background:#050510;
+    display:none;
+    flex-direction:column;
+    padding:20px;
+    z-index:100;
+}
+.pnl-h{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
 }
 
+/* kart */
 .card{
-  background:#111;
-  margin:10px;
-  padding:10px;
-  border-radius:10px;
+    background:rgba(255,255,255,0.05);
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-button{padding:10px 15px;font-weight:bold;}
-#loot{position:fixed;top:20px;right:20px;display:none;cursor:pointer;}
-#drop{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000d;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
+
+.buy{
+    background:var(--p);
+    border:none;
+    padding:8px 14px;
+    border-radius:10px;
+    font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<h1 id="money">0 ₺</h1>
-<div>Gelir/sn: <span id="inc">0</span></div>
+<!-- PARA -->
+<div class="h-panel">
+    <div id="money">0 ₺</div>
+</div>
 
-<div class="core" onclick="clickCore()">⚡</div>
+<!-- TIKLAMA -->
+<div class="core">
+    <button onclick="tıkla()">⚡</button>
+</div>
 
-<div id="loot">🎁</div>
-
-<div class="nav">
-<button onclick="openP('shop')">🛒</button>
-<button onclick="openP('inv')">🎒</button>
-<button onclick="openP('set')">⚙️</button>
+<!-- ALT MENU -->
+<div class="nav-bar">
+    <button class="n-btn" onclick="pAç('mkt')">🛒</button>
+    <button class="n-btn" onclick="pAç('inv')">🎒</button>
+    <button class="n-btn" onclick="pAç('set')">⚙️</button>
 </div>
 
 <!-- MARKET -->
-<div id="p-shop" class="pnl">
-<h2>Market</h2>
-<div id="shop"></div>
-<button onclick="closeP()">Kapat</button>
+<div id="p-mkt" class="pnl">
+    <div class="pnl-h">
+        <h2>MARKET</h2>
+        <b onclick="pKapat()">×</b>
+    </div>
+    <p>Market yakında büyüyecek.</p>
 </div>
 
 <!-- ENVANTER -->
 <div id="p-inv" class="pnl">
-<h2>Envanter</h2>
-<div id="equip"></div>
-<div id="inv"></div>
-<button onclick="closeP()">Kapat</button>
+    <div class="pnl-h">
+        <h2>ENVANTER</h2>
+        <b onclick="pKapat()">×</b>
+    </div>
+    <div id="inv-list" style="overflow:auto;flex:1;"></div>
 </div>
 
 <!-- AYARLAR -->
 <div id="p-set" class="pnl">
-<h2>Ayarlar</h2>
-<button onclick="daily()">Günlük Ödül</button>
-<button onclick="rst()">RESET</button>
-<button onclick="closeP()">Kapat</button>
+    <div class="pnl-h">
+        <h2>AYARLAR</h2>
+        <b onclick="pKapat()">×</b>
+    </div>
+    <button onclick="localStorage.clear();location.reload();" class="buy">
+        VERİLERİ SİL
+    </button>
 </div>
 
-<!-- DROP -->
-<div id="drop"></div>
+<!-- PANEL AÇMA -->
+<script>
+function pAç(id){
+    document.querySelectorAll(".pnl").forEach(p=>p.style.display="none");
+    document.getElementById("p-"+id).style.display="flex";
+}
+function pKapat(){
+    document.querySelectorAll(".pnl").forEach(p=>p.style.display="none");
+}
+</script>
 
-<!-- MÜZİK -->
-<audio id="bgm" loop>
-  <source src="muzik.mp4" type="audio/mp4">
-</audio>
-
-<!-- OYUN BEYNİ -->
+<!-- ANA OYUN -->
 <script src="game.js"></script>
+
+<!-- ENVANTER -->
+<script src="inventory.js"></script>
 
 </body>
 </html>
