@@ -6,81 +6,23 @@
 <title>NEBULA OVERLORD</title>
 
 <style>
-:root { --p:#00f2ff; --s:#7000ff; --bg:#020205; --w:#fff; }
+:root { --p:#00f2ff; --bg:#020205; --w:#fff; }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;}
-body{
-    margin:0;
-    background:var(--bg);
-    color:white;
-    font-family:Segoe UI, sans-serif;
-    overflow:hidden;
-}
+body{margin:0;background:var(--bg);color:white;font-family:Segoe UI, sans-serif;overflow:hidden;}
 
-/* üst para */
-.h-panel{
-    text-align:center;
-    padding:25px;
-    border-bottom:1px solid rgba(255,255,255,0.05);
-}
-#money{
-    font-size:40px;
-    font-weight:900;
-    color:var(--p);
-}
+.h-panel{text-align:center;padding:25px;border-bottom:1px solid rgba(255,255,255,0.05);}
+#money{font-size:40px;font-weight:900;color:var(--p);}
 
-/* çekirdek */
-.core{
-    height:45vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.core button{
-    width:150px;height:150px;
-    border-radius:50%;
-    border:none;
-    font-size:50px;
-    background:#111;
-    color:white;
-}
+.core{height:45vh;display:flex;justify-content:center;align-items:center;}
+.core button{width:150px;height:150px;border-radius:50%;border:none;font-size:50px;background:#111;color:white;}
 .core button:active{transform:scale(0.9);}
 
-/* alt menu */
-.nav-bar{
-    position:fixed;
-    bottom:25px;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:15px;
-}
-.n-btn{
-    width:60px;height:60px;
-    border-radius:15px;
-    border:none;
-    background:#111;
-    color:white;
-    font-size:20px;
-}
+.nav-bar{position:fixed;bottom:25px;width:100%;display:flex;justify-content:center;gap:12px;}
+.n-btn{width:60px;height:60px;border-radius:15px;border:none;background:#111;color:white;font-size:20px;}
 
-/* panel */
-.pnl{
-    position:fixed;
-    inset:0;
-    background:#050510;
-    display:none;
-    flex-direction:column;
-    padding:20px;
-    z-index:100;
-}
-.pnl-h{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-}
+.pnl{position:fixed;inset:0;background:#050510;display:none;flex-direction:column;padding:20px;z-index:100;}
+.pnl-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 
-/* kart */
 .card{
     background:rgba(255,255,255,0.05);
     padding:15px;
@@ -117,6 +59,7 @@ body{
 <div class="nav-bar">
     <button class="n-btn" onclick="pAç('mkt')">🛒</button>
     <button class="n-btn" onclick="pAç('inv')">🎒</button>
+    <button class="n-btn" onclick="pAç('eq')">🧥</button>
     <button class="n-btn" onclick="pAç('set')">⚙️</button>
 </div>
 
@@ -126,7 +69,7 @@ body{
         <h2>MARKET</h2>
         <b onclick="pKapat()">×</b>
     </div>
-    <p>Market yakında büyüyecek.</p>
+    <div>Yakında...</div>
 </div>
 
 <!-- ENVANTER -->
@@ -136,6 +79,15 @@ body{
         <b onclick="pKapat()">×</b>
     </div>
     <div id="inv-list" style="overflow:auto;flex:1;"></div>
+</div>
+
+<!-- EQUIP -->
+<div id="p-eq" class="pnl">
+    <div class="pnl-h">
+        <h2>EKİPMAN</h2>
+        <b onclick="pKapat()">×</b>
+    </div>
+    <div id="eq-list" style="overflow:auto;flex:1;"></div>
 </div>
 
 <!-- AYARLAR -->
@@ -160,11 +112,11 @@ function pKapat(){
 }
 </script>
 
-<!-- ANA OYUN -->
+<!-- MODÜLLER -->
 <script src="game.js"></script>
-
-<!-- ENVANTER -->
+<script src="loot.js"></script>
 <script src="inventory.js"></script>
+<script src="equip.js"></script>
 
 </body>
 </html>
